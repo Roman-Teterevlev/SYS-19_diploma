@@ -2,12 +2,10 @@
 
 ### Дипломная работа по профессии «Системный администратор»
 
-
-1. Принципиальная схема создаваемой инфраструктуры:
+Принципиальная схема создаваемой инфраструктуры:
 ![alt text](https://github.com/Roman-Teterevlev/SYS-19_diploma/blob/main/ptsc_scheme.png)
 
-
-2. Развертывание инфраструктуры производится посредством terraform со стороннего VPS (macloud.host). Манифест прилагается.
+Развертывание инфраструктуры производится посредством terraform со стороннего VPS (macloud.host). Манифест прилагается.
 
 Созданы требуемые сервисы yandex-cloud:
 ![alt text](https://github.com/Roman-Teterevlev/SYS-19_diploma/blob/main/ptsc_services.png)
@@ -33,7 +31,7 @@
 ![alt text](https://github.com/Roman-Teterevlev/SYS-19_diploma/blob/main/ptsc_schedule.png)
 
 
-3. Создание создание и запуск сервисов осуществляется посредством ansible с бастион-хоста.
+Создание создание и запуск сервисов осуществляется посредством ansible с бастион-хоста.
 
 Структура дерева ansible playbook:
 ![alt text](https://github.com/Roman-Teterevlev/SYS-19_diploma/blob/main/ptsc_ansible_tree.png)
