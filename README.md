@@ -2,6 +2,7 @@
 
 ### Дипломная работа по профессии «Системный администратор»
 
+
 1. Принципиальная схема создаваемой инфраструктуры:
 ![alt text](https://github.com/Roman-Teterevlev/SYS-19_diploma/blob/main/ptsc_scheme.png)
 
@@ -48,5 +49,3 @@
 ![alt text](https://github.com/Roman-Teterevlev/SYS-19_diploma/blob/main/ptsc_kibana.png)
 
 Для доступа и проверки работоспособности инфорструктуры предоставлен доступ на bastion-host: "62.84.118.39", "id_ed25519".
-
- 
