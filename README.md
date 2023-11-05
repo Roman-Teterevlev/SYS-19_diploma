@@ -5,6 +5,7 @@
 1. Принципиальная схема создаваемой инфраструктуры:
 ![alt text](https://github.com/Roman-Teterevlev/SYS-19_diploma/blob/main/ptsc_scheme.png)
 
+
 2. Развертывание инфраструктуры производится посредством terraform со стороннего VPS (macloud.host). Манифест прилагается.
 
 2.1. Созданы требуемые сервисы yandex-cloud:
@@ -29,6 +30,7 @@
 
 2.7. Создано расписание создания и удаления снимков дисков:
 ![alt text](https://github.com/Roman-Teterevlev/SYS-19_diploma/blob/main/ptsc_schedule.png)
+
 
 3. Создание создание и запуск сервисов осуществляется посредством ansible с бастион-хоста.
 
