@@ -1,0 +1,7 @@
+---
+  - name: start kibana service
+    ansible.builtin.service:
+      name: kibana
+      state: started
+      enabled: true
+

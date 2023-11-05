@@ -1,0 +1,6 @@
+# tasks file for filebeat
+  - import_tasks: download_repo.yaml
+  - import_tasks: install_service.yaml
+  - import_tasks: config_setting.yaml
+  - import_tasks: start_service.yaml
+

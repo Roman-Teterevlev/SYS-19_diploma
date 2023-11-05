@@ -1,0 +1,6 @@
+---
+# tasks file for zabbix_agent_web1_2
+  - import_tasks: download_repo.yaml
+  - import_tasks: install_service.yaml
+  - import_tasks: start_service.yaml
+

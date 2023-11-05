@@ -1,0 +1,29 @@
+[zabbix]
+zabbix ansible_host=ubuntu@192.168.3.10
+
+[zabbix_agent_web1_2]
+zabbix_agent_web1 ansible_host=ubuntu@192.168.1.10
+zabbix_agent_web2 ansible_host=ubuntu@192.168.2.10
+
+[elasticsearch]
+elasticsearch ansible_host=ubuntu@192.168.2.20
+
+[kibana]
+kibana ansible_host=ubuntu@192.168.4.10
+
+[filebeat_web1]
+filebeat1 ansible_host=ubuntu@192.168.1.10
+
+[filebeat_web2]
+filebeat2 ansible_host=ubuntu@192.168.2.10
+
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
+zabbix=192.168.3.10
+agent1=192.168.1.10
+agent2=192.168.2.10
+elasticsearch=192.168.2.20
+kibana=192.168.4.10
+filebeat1=192.168.1.10
+filebeat2=192.168.2.10
+

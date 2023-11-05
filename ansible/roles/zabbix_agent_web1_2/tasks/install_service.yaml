@@ -1,0 +1,14 @@
+---
+  - name: install zabbix-agent service
+    become: yes
+    ansible.builtin.apt:
+      name:
+      - zabbix-agent
+      state: present
+
+  - name: replace the line password
+    ansible.builtin.lineinfile:
+      path: /etc/zabbix/zabbix_agentd.conf
+      regexp: '^Server=127.0.0.1$'
+      line: 'Server=127.0.0.1,{{ zabbix }}'
+

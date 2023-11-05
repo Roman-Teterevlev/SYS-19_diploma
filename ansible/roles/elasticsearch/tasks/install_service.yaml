@@ -1,0 +1,7 @@
+---
+  - name: install elasticsearch service
+    become: yes
+    ansible.builtin.apt:
+      name: elasticsearch
+      state: present
+

@@ -1,0 +1,7 @@
+---
+  - name: install kibana service
+    become: yes
+    ansible.builtin.apt:
+      name: kibana
+      state: present
+

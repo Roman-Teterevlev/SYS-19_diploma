@@ -1,0 +1,36 @@
+---  
+  - name: replace the line host elasticsearch
+    become: true
+    ansible.builtin.lineinfile:
+      path: /etc/elasticsearch/elasticsearch.yml
+      regexp: '^#network\.host: 192\.168\.0\.1$'
+      line: 'network.host: "{{ elasticsearch }}"'
+      
+  - name: replace the line port elasticsearch
+    become: true
+    ansible.builtin.lineinfile:
+      path: /etc/elasticsearch/elasticsearch.yml
+      regexp: '^#http\.port: 9200$'
+      line: 'http.port: 9200'
+      
+  - name: replace the line discovery elasticsearch
+    become: true
+    ansible.builtin.lineinfile:
+      path: /etc/elasticsearch/elasticsearch.yml
+      regexp: '^#discovery\.seed_hosts: \["host1", "host2"\]$'
+      line: 'discovery.seed_hosts: ["{{ elasticsearch }}"]'
+  
+  - name: replace the line node name
+    become: true
+    ansible.builtin.lineinfile:
+      path: /etc/elasticsearch/elasticsearch.yml
+      regexp: '^#node\.name: node-1$'
+      line: 'node.name: node-1'
+
+  - name: replace the line cluster
+    become: true
+    ansible.builtin.lineinfile:
+      path: /etc/elasticsearch/elasticsearch.yml
+      regexp: '^#cluster\.initial_master_nodes: \["node-1", "node-2"\]$'
+      line: 'cluster.initial_master_nodes: ["node-1"]'
+

@@ -1,0 +1,7 @@
+---
+  - name: start filebeat service
+    ansible.builtin.service:
+      name: filebeat
+      state: started
+      enabled: true
+

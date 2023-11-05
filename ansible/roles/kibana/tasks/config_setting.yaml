@@ -1,0 +1,22 @@
+---  
+  - name: replace the line host
+    become: true
+    ansible.builtin.lineinfile:
+      path: /etc/kibana/kibana.yml
+      regexp: '^#server\.host: "localhost"$'
+      line: 'server.host: "{{ kibana }}"'
+      
+  - name: replace the line port
+    become: true
+    ansible.builtin.lineinfile:
+      path: /etc/kibana/kibana.yml
+      regexp: '^#server\.port: 5601$'
+      line: 'server.port: 5601'
+      
+  - name: replace the line elasticsearch.hosts
+    become: true
+    ansible.builtin.lineinfile:
+      path: /etc/kibana/kibana.yml
+      regexp: '^#elasticsearch\.hosts: \["http:\/\/localhost:9200"\]$'
+      line: 'elasticsearch.hosts: ["http://{{ elasticsearch }}:9200"]'
+

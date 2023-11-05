@@ -1,0 +1,38 @@
+---
+  - name: update
+    become: true
+    ansible.builtin.apt:
+      update_cache: yes
+
+#var.1
+#  - name: install dependencies gnupg
+#    become: true
+#    ansible.builtin.apt:
+#      name: gnupg
+
+#  - name: install dependencies apt-transport-https
+#    become: true
+#    ansible.builtin.apt:
+#      name: apt-transport-https
+
+#  - name: import public GPG key into APT
+#    become: true
+#    ansible.builtin.shell: wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+
+#  - name: add source list 
+#    become: true
+#    ansible.builtin.shell: echo "deb [trusted=yes] https://mirror.yandex.ru/mirrors/elastic/7/ stable main" | sudo tee /etc/apt/sources.list.d/elastic-7.x.list
+
+#var.2
+#пакет .deb предварительно скачан через VPN
+
+  - name: kibana repo package
+    become: true
+    ansible.builtin.apt:
+      deb: ./kibana-7.17.9-amd64.deb
+
+  - name: update
+    become: true
+    ansible.builtin.apt:
+      update_cache: yes
+

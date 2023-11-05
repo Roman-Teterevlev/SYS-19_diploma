@@ -1,0 +1,7 @@
+---
+  - name: start elasticsearch service
+    ansible.builtin.service:
+      name: elasticsearch
+      state: started
+      enabled: true
+

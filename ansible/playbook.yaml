@@ -1,0 +1,37 @@
+---
+- name: zabbix
+  hosts: zabbix
+  become: true
+  roles:
+    - zabbix
+    
+- name: zabbix_agent_web1_2
+  hosts: zabbix_agent_web1_2
+  become: true
+  roles:
+    - zabbix_agent_web1_2
+
+- name: elasticsearch
+  hosts: elasticsearch
+  become: true
+  roles:
+    - elasticsearch
+
+- name: kibana
+  hosts: kibana
+  become: true
+  roles:
+    - kibana
+
+- name: filebeat_web1
+  hosts: filebeat_web1
+  become: true
+  roles:
+    - filebeat_web1
+
+- name: filebeat_web2
+  hosts: filebeat_web2
+  become: true
+  roles:
+    - filebeat_web2
+
