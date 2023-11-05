@@ -31,7 +31,7 @@
 ![alt text](https://github.com/Roman-Teterevlev/SYS-19_diploma/blob/main/ptsc_schedule.png)
 
 
-Создание создание и запуск сервисов осуществляется посредством ansible с бастион-хоста.
+Создание и запуск сервисов осуществляется посредством ansible с бастион-хоста.
 
 Структура дерева ansible playbook:
 ![alt text](https://github.com/Roman-Teterevlev/SYS-19_diploma/blob/main/ptsc_ansible_tree.png)
@@ -46,4 +46,4 @@
 Интерфейс kibana:
 ![alt text](https://github.com/Roman-Teterevlev/SYS-19_diploma/blob/main/ptsc_kibana.png)
 
-Для доступа и проверки работоспособности инфорструктуры предоставлен доступ на bastion-host: "62.84.118.39", "id_ed25519".
+Для проверки работоспособности инфорструктуры предоставлен доступ на bastion-host: "62.84.118.39", "id_ed25519".
