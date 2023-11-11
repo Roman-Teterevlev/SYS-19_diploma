@@ -45,5 +45,3 @@
 
 Интерфейс kibana:
 ![alt text](https://github.com/Roman-Teterevlev/SYS-19_diploma/blob/main/ptsc/ptsc_kibana.png)
-
-Для проверки работоспособности инфорструктуры предоставлен доступ на bastion-host: "62.84.118.39", "id_ed25519".
