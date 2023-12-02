@@ -28,7 +28,7 @@
 ![alt text](https://github.com/Roman-Teterevlev/SYS-19_diploma/blob/main/ptsc/ptsc_balancer_1.png)
 ![alt text](https://github.com/Roman-Teterevlev/SYS-19_diploma/blob/main/ptsc/ptsc_balancer_2.png)
 
-Созданы снимкм дисков витруальных машин (Snapshots have been created):
+Созданы снимки дисков витруальных машин (Snapshots have been created):
 ![alt text](https://github.com/Roman-Teterevlev/SYS-19_diploma/blob/main/ptsc/ptsc_snapshots.png)
 
 Создано расписание создания и удаления снимков дисков (The schedule for snapshots has been created):
@@ -37,7 +37,7 @@
 Структура дерева ansible playbook (Ansible playbook tree):
 ![alt text](https://github.com/Roman-Teterevlev/SYS-19_diploma/blob/main/ptsc/ptsc_ansible_tree.png)
 
-Успешное завершение развертываения инфраструктуры (Apply complete):
+Успешное завершение развертывания инфраструктуры (Apply complete):
 ![alt text](https://github.com/Roman-Teterevlev/SYS-19_diploma/blob/main/ptsc/ptsc_local-exec.png)
 
 Информационные панели параметров zabbix-server и web-servers (Zabbix dashboards):
