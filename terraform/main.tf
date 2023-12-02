@@ -23,28 +23,28 @@ resource "yandex_vpc_network" "vpc" {
 resource "yandex_vpc_subnet" "subnet-private-a" {
   name           = "subnet-private-a"
   zone           = "ru-central1-a"
-  v4_cidr_blocks = ["192.168.1.0/24"]
+  v4_cidr_blocks = ["${var.subnet-private-a}"]
   network_id     = yandex_vpc_network.vpc.id
 }
 
 resource "yandex_vpc_subnet" "subnet-private-b" {
   name           = "subnet-private-b"
   zone           = "ru-central1-b"
-  v4_cidr_blocks = ["192.168.2.0/24"]
+  v4_cidr_blocks = ["${var.subnet-private-b}"]
   network_id     = yandex_vpc_network.vpc.id
 }
 
 resource "yandex_vpc_subnet" "subnet-public-a" {
   name           = "subnet-public-a"
   zone           = "ru-central1-a"
-  v4_cidr_blocks = ["192.168.3.0/24"]
+  v4_cidr_blocks = ["${var.subnet-public-a}"]
   network_id     = yandex_vpc_network.vpc.id
 }
 
 resource "yandex_vpc_subnet" "subnet-public-b" {
   name           = "subnet-public-b"
   zone           = "ru-central1-b"
-  v4_cidr_blocks = ["192.168.4.0/24"]
+  v4_cidr_blocks = ["${var.subnet-public-b}"]
   network_id     = yandex_vpc_network.vpc.id
 }
 
@@ -73,7 +73,7 @@ resource "yandex_compute_instance" "web1" {
     subnet_id  = yandex_vpc_subnet.subnet-private-a.id
     nat        = true
     ipv4       = true
-    ip_address = "192.168.1.10"
+    ip_address = var.ip_web1
     security_group_ids = [
       yandex_vpc_security_group.bastion-host-internal-sg.id,
       yandex_vpc_security_group.webs-sg.id
@@ -86,7 +86,7 @@ resource "yandex_compute_instance" "web1" {
   }
 
   scheduling_policy {
-    preemptible = false
+    preemptible = true
   }
 }
 
@@ -115,7 +115,7 @@ resource "yandex_compute_instance" "web2" {
     subnet_id  = yandex_vpc_subnet.subnet-private-b.id
     nat        = true
     ipv4       = true
-    ip_address = "192.168.2.10"
+    ip_address = var.ip_web2
     security_group_ids = [
       yandex_vpc_security_group.bastion-host-internal-sg.id,
       yandex_vpc_security_group.webs-sg.id
@@ -128,7 +128,7 @@ resource "yandex_compute_instance" "web2" {
   }
 
   scheduling_policy {
-    preemptible = false
+    preemptible = true
   }
 }
 
@@ -157,7 +157,7 @@ resource "yandex_compute_instance" "zabbix" {
     subnet_id  = yandex_vpc_subnet.subnet-public-a.id
     nat        = true
     ipv4       = true
-    ip_address = "192.168.3.10"
+    ip_address = var.ip_zabbix
     security_group_ids = [
       yandex_vpc_security_group.bastion-host-internal-sg.id,
       yandex_vpc_security_group.zabbix-sg.id
@@ -169,7 +169,7 @@ resource "yandex_compute_instance" "zabbix" {
   }
 
   scheduling_policy {
-    preemptible = false
+    preemptible = true
   }
 }
 
@@ -198,7 +198,7 @@ resource "yandex_compute_instance" "elasticsearch" {
     subnet_id  = yandex_vpc_subnet.subnet-private-b.id
     nat        = true
     ipv4       = true
-    ip_address = "192.168.2.20"
+    ip_address = var.ip_elasticsearch
     security_group_ids = [
       yandex_vpc_security_group.bastion-host-internal-sg.id,
       yandex_vpc_security_group.elasticsearch-sg.id
@@ -210,7 +210,7 @@ resource "yandex_compute_instance" "elasticsearch" {
   }
 
   scheduling_policy {
-    preemptible = false
+    preemptible = true
   }
 }
 
@@ -239,7 +239,7 @@ resource "yandex_compute_instance" "kibana" {
     subnet_id  = yandex_vpc_subnet.subnet-public-b.id
     nat        = true
     ipv4       = true
-    ip_address = "192.168.4.10"
+    ip_address = var.ip_kibana
     security_group_ids = [
       yandex_vpc_security_group.bastion-host-internal-sg.id,
       yandex_vpc_security_group.kibana-sg.id
@@ -251,7 +251,7 @@ resource "yandex_compute_instance" "kibana" {
   }
 
   scheduling_policy {
-    preemptible = false
+    preemptible = true
   }
 }
 
@@ -280,7 +280,7 @@ resource "yandex_compute_instance" "bastion-host" {
     subnet_id  = yandex_vpc_subnet.subnet-public-a.id
     nat        = true
     ipv4       = true
-    ip_address = "192.168.3.30"
+    ip_address = var.ip_bastion-host
     security_group_ids = [
       yandex_vpc_security_group.bastion-host-internal-sg.id,
       yandex_vpc_security_group.bastion-host-external-sg.id
@@ -292,7 +292,7 @@ resource "yandex_compute_instance" "bastion-host" {
   }
 
   scheduling_policy {
-    preemptible = false
+    preemptible = true
   }
 }
 
@@ -442,5 +442,108 @@ resource "yandex_compute_snapshot_schedule" "schedule" {
   }
 
   disk_ids = ["${yandex_compute_instance.web1.boot_disk[0].disk_id}", "${yandex_compute_instance.web2.boot_disk[0].disk_id}", "${yandex_compute_instance.zabbix.boot_disk[0].disk_id}", "${yandex_compute_instance.elasticsearch.boot_disk[0].disk_id}", "${yandex_compute_instance.kibana.boot_disk[0].disk_id}", "${yandex_compute_instance.bastion-host.boot_disk[0].disk_id}"]
+
+  depends_on = [yandex_compute_snapshot.web1, yandex_compute_snapshot.web2, yandex_compute_snapshot.zabbix, yandex_compute_snapshot.elasticsearch, yandex_compute_snapshot.kibana, yandex_compute_snapshot.bastion-host]
+
+}
+
+#ansible install
+#resource "null_resource" "ansible-install" {
+
+#  provisioner "local-exec" {
+#    command = "sudo apt-add-repository ppa:ansible/ansible -y"
+#  }
+
+#  provisioner "local-exec" {
+#    command = "sudo apt update -y"
+#  }
+
+#  provisioner "local-exec" {
+#    command = "sudo apt install ansible -y"
+#  }
+
+#  depends_on = [yandex_compute_snapshot_schedule.schedule]
+#}
+
+#ssh config
+resource "null_resource" "ssh-config" {
+
+  provisioner "local-exec" {
+    command = "echo 'Host *' >> ~/.ssh/config"
+  }
+
+   provisioner "local-exec" {
+    command = "echo '    StrictHostKeyChecking accept-new' >> ~/.ssh/config"
+  }
+  
+   provisioner "local-exec" {
+    command = "echo '    UserKnownHostsFile=/dev/null' >> ~/.ssh/config"
+  }
+
+   provisioner "local-exec" {
+    command = "echo 'Host 192.168.*' >> ~/.ssh/config"
+  }
+
+  provisioner "local-exec" {
+    command = "echo '    ProxyJump ubuntu@${yandex_compute_instance.bastion-host.network_interface.0.nat_ip_address}' >> ~/.ssh/config"
+  }
+
+  depends_on = [yandex_compute_snapshot_schedule.schedule]
+
+}
+
+#for elasticsearch
+resource "null_resource" "elasticsearch" {
+
+  provisioner "local-exec" {
+    command = "scp /root/elasticsearch-7.17.9-amd64.deb ubuntu@${var.ip_elasticsearch}:/home/ubuntu/"
+  }
+
+  depends_on = [null_resource.ssh-config]
+
+}
+
+#for kibana
+resource "null_resource" "kibana" {
+
+  provisioner "local-exec" {
+    command = "scp /root/kibana-7.17.9-amd64.deb ubuntu@${var.ip_kibana}:/home/ubuntu/"
+  }
+
+  depends_on = [null_resource.elasticsearch]
+
+}
+
+#for web1 filebeat
+resource "null_resource" "web1-filebeat" {
+
+  provisioner "local-exec" {
+    command = "scp /root/filebeat-7.17.9-amd64.deb ubuntu@${var.ip_web1}:/home/ubuntu/"
+  }
+
+  depends_on = [null_resource.kibana]
+
+}
+
+#for web2 filebeat
+resource "null_resource" "web2-filebeat" {
+
+  provisioner "local-exec" {
+    command = "scp /root/filebeat-7.17.9-amd64.deb ubuntu@${var.ip_web2}:/home/ubuntu/"
+  }
+
+  depends_on = [null_resource.web1-filebeat]
+
+}
+
+#for ansible run
+resource "null_resource" "ansible-run" {
+
+  provisioner "local-exec" {
+    command = "ansible-playbook -i /root/SYS-19_diploma/ansible/inventory /root/SYS-19_diploma/ansible/playbook.yaml --ssh-common-args='-o StrictHostKeyChecking=accept-new'"
+  }
+
+  depends_on = [null_resource.web2-filebeat]
+
 }
 

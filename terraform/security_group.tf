@@ -89,14 +89,14 @@ resource "yandex_vpc_security_group" "bastion-host-external-sg" {
   ingress {
     protocol       = "TCP"
     description    = "allow 22"
-    v4_cidr_blocks = ["192.168.1.0/24", "192.168.2.0/24", "192.168.3.0/24", "192.168.4.0/24"]
+    v4_cidr_blocks = ["${var.subnet-private-a}", "${var.subnet-private-b}", "${var.subnet-public-a}", "${var.subnet-public-b}"]
     port           = 22
   }
 
   egress {
     protocol       = "TCP"
     description    = "allow 22"
-    v4_cidr_blocks = ["192.168.1.0/24", "192.168.2.0/24", "192.168.3.0/24", "192.168.4.0/24"]
+    v4_cidr_blocks = ["${var.subnet-private-a}", "${var.subnet-private-b}", "${var.subnet-public-a}", "${var.subnet-public-b}"]
     port           = 22
   }
 
@@ -116,14 +116,14 @@ resource "yandex_vpc_security_group" "bastion-host-internal-sg" {
   ingress {
     protocol       = "TCP"
     description    = "allow 22"
-    v4_cidr_blocks = ["192.168.1.0/24", "192.168.2.0/24", "192.168.3.0/24", "192.168.4.0/24"]
+    v4_cidr_blocks = ["${var.subnet-private-a}", "${var.subnet-private-b}", "${var.subnet-public-a}", "${var.subnet-public-b}"]
     port           = 22
   }
 
   egress {
     protocol       = "TCP"
     description    = "allow 22"
-    v4_cidr_blocks = ["192.168.1.0/24", "192.168.2.0/24", "192.168.3.0/24", "192.168.4.0/24"]
+    v4_cidr_blocks = ["${var.subnet-private-a}", "${var.subnet-private-b}", "${var.subnet-public-a}", "${var.subnet-public-b}"]
     port           = 22
   }
 
@@ -162,7 +162,7 @@ resource "yandex_vpc_security_group" "webs-sg" {
 
   ingress {
     protocol       = "TCP"
-    description    = "allow 10050 and 10051 for zabbix-agent" #["192.168.3.0/24"]
+    description    = "allow 10050 and 10051 for zabbix-agent"
     v4_cidr_blocks = ["0.0.0.0/0"]
     from_port      = 10050
     to_port        = 10051
@@ -170,7 +170,7 @@ resource "yandex_vpc_security_group" "webs-sg" {
 
   ingress {
     protocol       = "TCP"
-    description    = "allow >5000 random for filebeat" #["192.168.2.0/24"]
+    description    = "allow >5000 random for filebeat"
     v4_cidr_blocks = ["0.0.0.0/0"]
     from_port      = 5000
     to_port        = 65535

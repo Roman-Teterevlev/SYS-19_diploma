@@ -7,7 +7,7 @@
   - name: install zabbix repo package
     become: true
     ansible.builtin.apt:
-      deb: ./zabbix-release_6.0-4+ubuntu22.04_all.deb
+      deb: /home/ubuntu/zabbix-release_6.0-4+ubuntu22.04_all.deb
   
   - name: update
     become: true

@@ -4,12 +4,6 @@
   become: true
   roles:
     - zabbix
-    
-- name: zabbix_agent_web1_2
-  hosts: zabbix_agent_web1_2
-  become: true
-  roles:
-    - zabbix_agent_web1_2
 
 - name: elasticsearch
   hosts: elasticsearch
@@ -34,4 +28,10 @@
   become: true
   roles:
     - filebeat_web2
+
+- name: zabbix_agent_web1_2
+  hosts: zabbix_agent_web1_2
+  become: true
+  roles:
+    - zabbix_agent_web1_2
 

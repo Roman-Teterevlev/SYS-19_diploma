@@ -24,12 +24,12 @@
 #    ansible.builtin.shell: echo "deb [trusted=yes] https://mirror.yandex.ru/mirrors/elastic/7/ stable main" | sudo tee /etc/apt/sources.list.d/elastic-7.x.list
 
 #var.2
-#пакет .deb предварительно скачан через VPN
+#пакет .deb предварительно скачан, VPN
 
   - name: kibana repo package
     become: true
     ansible.builtin.apt:
-      deb: ./kibana-7.17.9-amd64.deb
+      deb: /home/ubuntu/kibana-7.17.9-amd64.deb
 
   - name: update
     become: true
